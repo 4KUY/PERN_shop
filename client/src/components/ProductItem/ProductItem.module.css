@@ -1,0 +1,10 @@
+.card{
+    height: 230px;
+    background-color: white;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid rgba(8, 24, 62, .1);
+}
+.lower{
+    margin-top:100px; 
+}

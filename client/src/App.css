@@ -1,0 +1,11 @@
+*{
+    
+}
+#root{
+    background-color: rgba(9, 10, 11, .02);
+    min-height: 100vh;
+}
+.headerlist{
+    display: flex;
+    justify-content: space-between;
+}
