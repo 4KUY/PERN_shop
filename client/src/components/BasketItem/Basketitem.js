@@ -22,7 +22,7 @@ export const Basketitem = ({ item, delProduct }) => {
 
                 }
 
-                <div className={classes.price} >{item.price}</div>
+                <div className={classes.price} >{item.price} ₽</div>
                 <Button
                     onClick={() => delProduct(item.id)}
                     className={classes.btnDel}

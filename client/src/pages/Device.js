@@ -1,20 +1,24 @@
-import React , {useEffect, useState} from 'react'
+import React , {useEffect, useState , useContext} from 'react'
 import { Card, Col, Container, Image, Row ,  Button } from 'react-bootstrap'
 import star from '../assets/star.png'
 import { useParams } from 'react-router-dom'
 import { fetchOneDevice } from '../http/deviceAPI'
+import { createBasketStuff } from '../http/deviceAPI'
+import { Context } from '..'
 function Device() {
- 
   
+  const { user } = useContext(Context)
   const [device , setDevice] = useState({info:[]})
-
   const {id} = useParams()
+
   useEffect(()=>{
-    
     fetchOneDevice(id).then(data => setDevice(data))
     console.log(id)
   },[])
-  console.log(device)
+
+  const addProduct = ()=>{
+    createBasketStuff(user.user.id, id).then(data => console.log(data))
+  }
   return (
     <Container>
       <Row style={{backgroundColor:'white' , border:'1px solid lightgray' , padding:'30px'}}>
@@ -31,7 +35,7 @@ function Device() {
                 style={{ fontSize:28 , border:'none'}}
           >
             <h3>От: {device.price} руб.</h3>
-            <Button variant='outline-dark' >Добавить в корзину</Button>
+            <Button variant='outline-dark' onClick={()=> addProduct()} >Добавить в корзину</Button>
           </Card>
         </Col>
 
