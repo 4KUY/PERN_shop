@@ -12,7 +12,7 @@ const Basket = observer(() => {
   const { user } = useContext(Context)
   const user1 = jwtDecode(localStorage.getItem('token'))
   function takeArr() {
-    return user.basket.map(item => item.deviceId)
+    return user.basket.map(item => item.productId)
   }
   useEffect(() => {
     fetchBasket(user1.id).then(data => {
