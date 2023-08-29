@@ -9,14 +9,14 @@ export const SortBar = () => {
   const [checked, setChecked] = useState(false)
 
 
-  const { device } = useContext(Context)
+  const { product } = useContext(Context)
   const sortProduct = (e) => {
     setChecked(e.currentTarget.checked)
     
     if (!checked) {
-      device.setSortByPrice()
+      product.setSortByPrice()
     } else {
-      device.setBaseDevices(false)
+      product.setBaseProducts(false)
     }
   }
   return (

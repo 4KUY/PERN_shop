@@ -15,7 +15,6 @@ import { faHouse  } from '@fortawesome/free-solid-svg-icons'
 const NavBar = observer(() => {
   const navigate = useNavigate()
   const { user } = useContext(Context)
-  console.log(user.user)
   const logout = ()=>{
     user.setIsUser({})
     user.setIsAuth(false)

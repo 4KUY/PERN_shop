@@ -18,16 +18,16 @@ export const fetchBrand = async() =>{
     return data
 }
 
-export const createDevice = async(device) =>{
-    const {data} = await $authHost.post('api/device' , device)
+export const createProduct = async(device) =>{
+    const {data} = await $authHost.post('api/product' , device)
     return data
 }
-export const fetchDevice = async() =>{
-    const {data} = await $host.get('api/device')
+export const fetchProducts = async() =>{
+    const {data} = await $host.get('api/product')
     return data
 }
-export const fetchOneDevice = async(id) =>{
-    const {data} = await $host.get('api/device/' + id)
+export const fetchOneProduct = async(id) =>{
+    const {data} = await $host.get('api/product/' + id)
     return data
 }
 

@@ -1,28 +1,28 @@
 const uuid = require('uuid')
 const path =require('path')
-const {Device , DeviceInfo} = require('../models/models')
+const {Product , ProductInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
-class DeviceController {
+class ProductController {
     async create(req, res , next) {
         try {
             let {name, price, brandId, typeId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            const device = await Device.create({name, price, brandId, typeId, img: fileName});
+            const product = await Product.create({name, price, brandId, typeId, img: fileName});
 
             if (info) {
                 info = JSON.parse(info)
                 info.forEach(i =>
-                    DeviceInfo.create({
+                    ProductInfo.create({
                         title: i.title,
                         description: i.description,
-                        productId: device.id
+                        productId: product.id
                     })
                 )
             }
 
-            return res.json(device)
+            return res.json(product)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
@@ -31,31 +31,31 @@ class DeviceController {
     async getAll(req, res) {
         let {brandId , typeId , limit , page} = req.query
         //let offset = page * limit - limit
-        let devices;
+        let products;
         if(!brandId && !typeId){
-            devices = await Device.findAndCountAll({include:[{model:DeviceInfo , as:'info'}]})
+            products = await Product.findAndCountAll({include:[{model:ProductInfo , as:'info'}]})
         }
         if(brandId && typeId){
-            devices = await Device.findAndCountAll({
+            products = await Product.findAndCountAll({
                 where:{typeId , brandId} ,
-                include:[{model:DeviceInfo , as:'info'}], 
+                include:[{model:ProductInfo , as:'info'}], 
                 limit,
                 offset
             })
         }
-        return res.json(devices)
+        return res.json(products)
     }
     async getOne(req, res){
         const {id} = req.params
-        const device = await Device.findOne(
+        const product = await Product.findOne(
             {
                 where:{id},
-                include:[{model:DeviceInfo , as:'info'}]
+                include:[{model:ProductInfo , as:'info'}]
             }
         )
-        return res.json(device)
+        return res.json(product)
     }
     
 }
 
-module.exports = new DeviceController
+module.exports = new ProductController

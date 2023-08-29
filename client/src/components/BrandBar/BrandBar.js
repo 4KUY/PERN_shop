@@ -2,12 +2,13 @@ import React, { useContext } from 'react'
 import { Context } from '../..'
 import { Row, Card, ListGroup } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
+import classes from './BrandBar.module.css'
 const BrandBar = observer(({fuseFilter}) => {
-  const { device } = useContext(Context)
+  const { product } = useContext(Context)
 
   const func = (brand) => {
-    device.setSelectedBrand(brand)
-    device.setSortDevices(fuseFilter())
+    product.setSelectedBrand(brand)
+    product.setSortProducts(fuseFilter())
   }
 
   return (
@@ -16,9 +17,9 @@ const BrandBar = observer(({fuseFilter}) => {
       <ListGroup className='mt-2'>
         
          
-      {device.brands.map(brand =>
+      {product.brands.map(brand =>
         <ListGroup.Item
-          active={brand.id === device.selectedBrand.id}
+          active={brand.id === product.selectedBrand.id}
           className='p-3'
           key={brand.id}
           onClick={() => func(brand)}
@@ -28,10 +29,9 @@ const BrandBar = observer(({fuseFilter}) => {
       )}
       
     </ListGroup>
-      {Object.keys(device.selectedBrand).length !== 0 || Object.keys(device.selectedType).length !== 0 ? <Card
-        style={{ cursor: 'pointer'  }}
-        className='p-3 ms-5 '
-        onClick={() => device.setBaseDevices(true)}
+      {Object.keys(product.selectedBrand).length !== 0 || Object.keys(product.selectedType).length !== 0 ? <Card
+        className={`p-3 ms-5  ${classes.btnReset}`}  
+        onClick={() => product.setBaseProducts(true)}
         border='danger' 
       >Сброс</Card> : <></>}
       

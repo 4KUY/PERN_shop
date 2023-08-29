@@ -1,5 +1,5 @@
 'use strict';
-const deviceData = require('../mokData/devices.json');
+const goodsData = require('../mokData/goods.json');
 const typesData = require('../mokData/types.json');
 const brandData = require('../mokData/brands.json');
 
@@ -27,7 +27,7 @@ module.exports = {
       })
     , {});
     await queryInterface.bulkInsert('products', 
-    deviceData.map((item) => {
+    goodsData.map((item) => {
           return {
             name:item.name ,
             price:item.price,

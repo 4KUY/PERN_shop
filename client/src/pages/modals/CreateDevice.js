@@ -2,24 +2,21 @@ import React, { useContext, useState , useEffect } from 'react'
 import { Modal, Button, Form, Dropdown, Col , Row } from 'react-bootstrap'
 import {Context} from '../..'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
-import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem'
 import { observer } from 'mobx-react-lite'
-import { createDevice, fetchBrand,  fetchType } from '../../http/deviceAPI'
+import { createProduct, fetchBrand,  fetchType } from '../../http/productAPI'
 const CreateDevice = observer(({show , onHide}) => {
-    const { device } = useContext(Context)
+    const { product } = useContext(Context)
     const [info , setInfo] = useState([])
     const [name , setName] = useState('')
     const [price , setPrice] = useState(0)
     const [file , setFile] = useState(null)
-    const [brand , setBrand] = useState('')
-    const [type , setType] = useState('')
 
 
 
     useEffect(()=>{
-        fetchType().then(data => device.setTypes(data))
-        fetchBrand().then(data => device.setBrands(data))
+        fetchType().then(data => product.setTypes(data))
+        fetchBrand().then(data => product.setBrands(data))
       },[])
      const addInfo = ()=>{
         setInfo([...info , {title: '' , description: '' , number: Date.now()}])
@@ -36,11 +33,11 @@ const CreateDevice = observer(({show , onHide}) => {
         formData.append('name' , name)
         formData.append('price' , `${price}`)
         formData.append('img' , file)
-        formData.append('brandId' , device.selectedBrand.id)
-        formData.append('typeId' , device.selectedType.id)
+        formData.append('brandId' , product.selectedBrand.id)
+        formData.append('typeId' , product.selectedType.id)
         formData.append('info' , JSON.stringify(info))
         console.log(formData)
-        createDevice(formData).then(data => onHide)
+        createProduct(formData).then(data => onHide)
     }
     const selectFile = e =>{
        setFile(e.target.files[0])
@@ -61,11 +58,11 @@ const CreateDevice = observer(({show , onHide}) => {
     <Modal.Body>
         <Form>
             <Dropdown>
-                <DropdownToggle>{device.selectedType.name || 'Выберите тип'}</DropdownToggle>
+                <DropdownToggle>{product.selectedType.name || 'Выберите тип'}</DropdownToggle>
                 <Dropdown.Menu>
-                {device.types.map(type => 
+                {product.types.map(type => 
                         <DropdownItem 
-                            onClick={() => device.setSelectedType(type)} 
+                            onClick={() => product.setSelectedType(type)} 
                             key={type.id}
                             >{type.name}</DropdownItem>
                 )}
@@ -73,11 +70,11 @@ const CreateDevice = observer(({show , onHide}) => {
                 </Dropdown.Menu>
             </Dropdown>
             <Dropdown className='mt-2 mb-2'>
-                <DropdownToggle>{device.selectedBrand.name || 'Выберите бренд'}</DropdownToggle>
+                <DropdownToggle>{product.selectedBrand.name || 'Выберите бренд'}</DropdownToggle>
                 <Dropdown.Menu>
-                {device.brands.map(brand => 
+                {product.brands.map(brand => 
                         <DropdownItem 
-                            onClick={() => device.setSelectedBrand(brand)} 
+                            onClick={() => product.setSelectedBrand(brand)} 
                             key={brand.id}
                             
                             >{brand.name}</DropdownItem>

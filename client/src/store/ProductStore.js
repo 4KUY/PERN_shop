@@ -1,7 +1,7 @@
 import {makeAutoObservable} from 'mobx'
 
 
-export default class DeviceStore {
+export default class ProductStore {
     
     constructor(){
         
@@ -11,29 +11,25 @@ export default class DeviceStore {
         this._brands = [
             
         ]
-        this._devices = []
+        this._products = []
         this._selectedType ={}
-        this._sortDevices =[]
+        this._sortProduct =[]
         this._selectedBrand ={}
-        this._devicesCount = 0
         this._tempSortDev ={}
         makeAutoObservable(this)
     }
-    setDevicesCount(count){
-        this._devicesCount= count
-        
-    }
+    
     setSelectedBrand(brand){
         this._selectedBrand= brand
         
     }
-    setBaseDevices(bool){
+    setBaseProducts(bool){
         if(bool){
         this._selectedType = {}
         this._selectedBrand= {}
-        this._sortDevices = this._devices
+        this._sortProduct = this._products
         }else{
-            this._sortDevices = this._tempSortDev
+            this._sortProduct = this._tempSortDev
         }
     }
     setSelectedType(type){
@@ -46,25 +42,21 @@ export default class DeviceStore {
     setBrands(brands){
         this._brands = brands
     }
-    setDiveces(devices){
-        this._devices = devices
+    setProducts(products){
+        this._products = products
     }
-    setSortDevices(devices){
-        this._sortDevices = devices
-    }
-
-
+    setSortProducts(products){
+        this._sortProduct = products
+    }//
     setSortByPrice(){
-        this._tempSortDev =  this._sortDevices
-        this._sortDevices = this._sortDevices.map(item => item).sort((a, b) => {return a.price - b.price})
+        this._tempSortDev =  this._sortProduct
+        this._sortProduct = this._sortProduct.map(item => item).sort((a, b) => {return a.price - b.price})
     }
 
 
 
 
-    get count(){
-        return this._devicesCount
-    }
+    
     get types(){
         return this._types
     }
@@ -77,10 +69,10 @@ export default class DeviceStore {
     get brands(){
         return this._brands
     }
-    get sortDevices(){
-        return this._sortDevices
+    get sortProduct(){
+        return this._sortProduct
     }
-    get devices(){
-        return this._devices
+    get products(){
+        return this._products
     }
 }

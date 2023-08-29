@@ -5,11 +5,11 @@ import { Row } from 'react-bootstrap'
 import { ProductItem } from './ProductItem/ProductItem'
 
 export const ProductList = observer(() => {
-    const { device } = useContext(Context)
+    const { product } = useContext(Context)
     return (
         <Row>
-            {device.sortDevices.map(device =>
-                <ProductItem key={device.id} device={device} /> 
+            {product.sortProduct.map(product =>
+                <ProductItem key={product.id} product={product} /> 
                 )}
         </Row>
     )
