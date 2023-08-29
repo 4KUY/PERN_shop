@@ -64,7 +64,7 @@ npm run dev
 
 #### Client:
 
-Open client/.env & change "REACT_APP_API_URL" variable to `http://localhost:"Your PORT"`
+Open client/.env & change "REACT_APP_API_URL" variable to `http://localhost:"Your server PORT"`
 
 Run client development server:
 
