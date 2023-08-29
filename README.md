@@ -1,6 +1,6 @@
-# Bug Tracker | PERN-TypeScript
+# Online shop | PERN
 
-Bug tracking app made with PERN + JS
+Online shop app made with PERN + JS
 
 ## Built using
 
@@ -25,8 +25,10 @@ Bug tracking app made with PERN + JS
 ## Features
 
 - Authentication (login/register w/ username & password)
-- CRUD projects, with ability to add product
-
+- CRUD projects, with ability to add goods
+- Sort goods by various parameters like price.
+- Filter products by types/brands.
+- Basket
 ## Screenshots
 
 #### Desktop/Tablet
@@ -35,3 +37,39 @@ Bug tracking app made with PERN + JS
 ![Desktop-3](https://github.com/4KUY/PERN_shop/blob/main/screenshots/screenshot-3.png)
 ![Desktop-4](https://github.com/4KUY/PERN_shop/blob/main/screenshots/screenshot-4.png)
 ![Desktop-1](https://github.com/4KUY/PERN_shop/blob/main/screenshots/screenshot-1.jpeg)
+
+
+## Usage
+
+#### Env variable:
+
+Change a .env file in server directory `server/.env` and fix the following :
+
+```
+PORT = "Your PORT"
+DB_USER = "Your DB_USER"
+DB_PASSWORD = "Your DB_PASSWORD"  
+```
+
+#### Server:
+
+Run backend development server:
+
+```
+cd server
+npm install
+npm run migration
+npm run dev
+```
+
+#### Client:
+
+Open client/.env & change "REACT_APP_API_URL" variable to `http://localhost:"Your PORT"`
+
+Run client development server:
+
+```
+cd client
+npm install
+npm start
+```
