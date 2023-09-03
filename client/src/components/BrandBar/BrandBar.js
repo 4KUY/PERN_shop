@@ -34,7 +34,6 @@ const BrandBar = observer(() => {
         onClick={() => product.setBaseProducts(true)}
         border='danger' 
       >Сброс</Card> : <></>}
-      <div>fd</div>
     </div>
   )
 })
