@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Context } from '../../index';
-const TypeBar = observer(({fuseFilter}) => {
+const TypeBar = observer(() => {
   const { product } = useContext(Context)
 
 
 
   const func = (type) => {
     product.setSelectedType(type)
-    product.setSortProducts(fuseFilter())
-  }
+    
+    product.setFilteredProducts()
+   }
   
   return (
     <>

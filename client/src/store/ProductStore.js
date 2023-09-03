@@ -17,6 +17,7 @@ export default class ProductStore {
         this._selectedBrand ={}
         this._tempSortDev ={}
         makeAutoObservable(this)
+
     }
     
     setSelectedBrand(brand){
@@ -47,10 +48,28 @@ export default class ProductStore {
     }
     setSortProducts(products){
         this._sortProduct = products
-    }//
+    }
+    setFilteredProducts(){
+        if (Object.keys(this._selectedBrand).length !== 0 && Object.keys(this._selectedType).length !== 0) {
+            this._sortProduct = this._products.filter(item => item.brandId === this._selectedBrand.id)
+            this._sortProduct = this._sortProduct.filter(item => item.typeId === this._selectedType.id)
+        }else if(Object.keys(this._selectedType).length !== 0) {
+            this._sortProduct = this._products.filter(item => item.typeId === this._selectedType.id)
+        
+        }else{
+            this._sortProduct = this._products.filter(item => item.brandId === this._selectedBrand.id)
+        }
+        
+        
+        
+    }
+
+
     setSortByPrice(){
         this._tempSortDev =  this._sortProduct
-        this._sortProduct = this._sortProduct.map(item => item).sort((a, b) => {return a.price - b.price})
+        this._sortProduct = this._sortProduct
+                                    .map(item => item)
+                                        .sort((a, b) => {return a.price - b.price})
     }
 
 

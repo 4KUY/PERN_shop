@@ -3,13 +3,13 @@ import { Context } from '../..'
 import { Row, Card, ListGroup } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 import classes from './BrandBar.module.css'
-const BrandBar = observer(({fuseFilter}) => {
+const BrandBar = observer(() => {
   const { product } = useContext(Context)
 
   const func = (brand) => {
     product.setSelectedBrand(brand)
-    product.setSortProducts(fuseFilter())
-  }
+    product.setFilteredProducts()
+    }
 
   return (
 
@@ -34,7 +34,7 @@ const BrandBar = observer(({fuseFilter}) => {
         onClick={() => product.setBaseProducts(true)}
         border='danger' 
       >Сброс</Card> : <></>}
-      
+      <div>fd</div>
     </div>
   )
 })
